@@ -1,0 +1,38 @@
+import { Router } from 'express';
+import { userPassport } from '@middlewares/passport';
+import CategoryRouter from './Categories';
+import DepartmentRouter from './Departments';
+import NotificationRouter from './Notifications';
+import PositionRouter from './Positions';
+import PurchaseHistoryRouter from './PurchasesHistories';
+import SessionsRouter from './Sessions';
+import RuleRouter from './Rules';
+import PersonalRequestRouter from './PersonalRequests';
+import AssetRouter from './Assets';
+import SupplierRouter from './Suppliers';
+import SelectionsRouter from './Selections';
+import UploadRouter from './Upload';
+import AdminRequestRouter from './AdminRequest';
+import UsersRouter from './Users';
+import RepairHistoriesRouter from './RepairHistories';
+import AdminAssetRequestRouter from './AdminAssetRequests';
+
+const router = Router();
+router.use('/admin_requests', userPassport.authenticate('jwt', { session: false }), AdminRequestRouter);
+router.use('/asset_requests', userPassport.authenticate('jwt', { session: false }), AdminAssetRequestRouter);
+router.use('/assets', userPassport.authenticate('jwt', { session: false }), AssetRouter);
+router.use('/categories', userPassport.authenticate('jwt', { session: false }), CategoryRouter);
+router.use('/departments', userPassport.authenticate('jwt', { session: false }), DepartmentRouter);
+router.use('/notifications', userPassport.authenticate('jwt', { session: false }), NotificationRouter);
+router.use('/personal_requests', userPassport.authenticate('jwt', { session: false }), PersonalRequestRouter);
+router.use('/positions', userPassport.authenticate('jwt', { session: false }), PositionRouter);
+router.use('/purchases_histories', userPassport.authenticate('jwt', { session: false }), PurchaseHistoryRouter);
+router.use('/repair_histories', userPassport.authenticate('jwt', { session: false }), RepairHistoriesRouter);
+router.use('/rules', userPassport.authenticate('jwt', { session: false }), RuleRouter);
+router.use('/selections', userPassport.authenticate('jwt', { session: false }), SelectionsRouter);
+router.use('/sessions', SessionsRouter);
+router.use('/suppliers', userPassport.authenticate('jwt', { session: false }), SupplierRouter);
+router.use('/upload', userPassport.authenticate('jwt', { session: false }), UploadRouter);
+router.use('/users', userPassport.authenticate('jwt', { session: false }), UsersRouter);
+
+export default router;
